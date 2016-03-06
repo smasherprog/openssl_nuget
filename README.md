@@ -2,7 +2,6 @@
 <p>This is a script I wrote for automated building the build of openssl for windows</p>
 <h3>Dependencies:</h3>
 <ul>
-<li>Cmake: Download and install the latest from here https://cmake.org/download/</li>
 <li>7Zip: Download and install the latest from here http://7-zip.org/download.html</li>
 <li>ActivePerl: Download and install the latest from here http://www.activestate.com/activeperl/downloads</li>
 <li>Openssl: Download the latest release <b>.tar.gz</b> from here https://www.openssl.org/source/</li>
