@@ -1,7 +1,6 @@
 set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
 set foundfile=""
 SET var=%cd%
-set headeradd=#if _WIN32 #if defined _DLL #pragma comment(lib, "md/ssleay32") #pragma comment(lib, "md/libeay32") #elif defined _MT #pragma comment(lib, "mt/ssleay32") #pragma comment(lib, "mt/libeay32") #endif #endif #ifdef  __cplusplus
 
 for %%g in (*.gz) do set foundfile=%%~ng
 set filename=%foundfile:.tar=%
@@ -41,6 +40,6 @@ if exist "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/vcvars32.ba
 	start /wait cmd.exe /k "build_each64.bat openssl-src-win64-VS2015 debug-VC-WIN64A  "%var%\openssl\lib\native\v140\windesktop\msvcstl\x64\Debug\md" "/MD" "%var%\openssl\build\native\include\" "14.0""
 
 )
-call powershell -Command "(gc %var%\openssl\build\native\include\openssl\opensslconf.h) -replace '#ifdef  __cplusplus', '%headeradd%' | Out-File '%var%\openssl\build\native\include\openssl\opensslconf.h'"
-
+call copy opensslconf.h %var%\openssl\build\native\include\openssl\
+call rename openssl open_ssl
 start /wait cmd.exe /k "cleanbuild.bat %filename%"
