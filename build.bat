@@ -13,6 +13,7 @@ if exist "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/vcvars32.ba
 	call xcopy "%var%\%filename%" "%var%\openssl-src-win32-VS2013\" /E /H /K /y
 	call xcopy "%var%\%filename%" "%var%\openssl-src-win64-VS2013\" /E /H /K /y
 	call copy nasm.exe %var%\openssl-src-win32-VS2013\
+
 	start /wait cmd.exe /k "build_each32.bat openssl-src-win32-VS2013 VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Release\mt" "/MT" "%var%\openssl\build\native\include\" "12.0""
 	start /wait cmd.exe /k "build_each32.bat openssl-src-win32-VS2013 VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Release\md" "/MD" "%var%\openssl\build\native\include\" "12.0""
 	start /wait cmd.exe /k "build_each32.bat openssl-src-win32-VS2013 debug-VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Debug\mt" "/MT" "%var%\openssl\build\native\include\" "12.0""
