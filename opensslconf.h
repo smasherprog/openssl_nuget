@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 	/* OpenSSL was configured with the following options: */
-
+#if defined _WIN32
 #if defined _M_AMD64 || defined _M_X64
 #ifndef OPENSSL_SYSNAME_WIN64A
 # define OPENSSL_SYSNAME_WIN64A
@@ -27,6 +27,8 @@ extern "C" {
 # define OPENSSL_SYSNAME_WIN32
 #endif
 #endif
+#endif
+
 #ifndef OPENSSL_DOING_MAKEDEPEND
 
 
@@ -74,7 +76,7 @@ extern "C" {
 #endif
 
 #endif /* OPENSSL_DOING_MAKEDEPEND */
-
+#define OPENSSL_CPUID_OB
 #ifndef OPENSSL_THREADS
 # define OPENSSL_THREADS
 #endif
@@ -128,11 +130,6 @@ extern "C" {
 # endif
 #endif
 
-#define OPENSSL_CPUID_OBJ
-
-	/* crypto/opensslconf.h.in */
-
-	/* Generate 80386 code? */
 #undef I386_ONLY
 
 #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
