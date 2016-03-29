@@ -2,7 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>open_ssl</id>
-    <version>1.0.2</version>
+	<title>Openssl 1.0.2g</title>
+    <version>1.0.2.01</version>
     <authors>Scott Lee</authors>
     <owners>Scott Lee</owners>
     <licenseUrl>https://www.openssl.org/source/license.html</licenseUrl>
@@ -14,7 +15,7 @@
 
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2016</copyright>
-    <tags>openssl native C++ v120 windesktop dyn rt-dyn msvcstl static v140</tags>
+    <tags>openssl native C++ v120 windesktop dyn rt-dyn msvcstl static v140 Android Gcc</tags>
     <dependencies>
     </dependencies>
   </metadata>
