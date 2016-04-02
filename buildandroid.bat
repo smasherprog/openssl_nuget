@@ -1,5 +1,8 @@
+set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
+set foundfile=""
 SET var=%cd%
-set filename=%~1
+for %%g in (*.gz) do set foundfile=%%~ng
+set filename=%foundfile:.tar=%
 
 call xcopy "%var%\%filename%" "%var%\openssl-android\" /E /H /K /y
 
@@ -105,9 +108,8 @@ echo Building Android Libraries
 call ndk-build
 cd ..
 
-call xcopy "%cd%\openssl-android\libs" "%cd%\openssl\lib\native\andriod\Gcc\" /E /H /K /y
+call xcopy "%cd%\openssl-android\libs" "%cd%\openssl\lib\native\andriod\clang\" /E /H /K /y
 
-call rd /s /q "openssl-android" 
 goto:eof
 
 :gen_asm_mac_ia32  

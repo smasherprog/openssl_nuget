@@ -29,30 +29,25 @@
     </Link>
   </ItemDefinitionGroup>
   <Target Name="libjpeg_turbo_android" BeforeTargets="Link" DependsOnTargets="$(ComputeLinkInputsTargets)">
-		<ItemGroup Condition="'$(PlatformToolset)' == 'Gcc_4_9' And '$(Platform)' == 'x86' And '$(AndroidAPILevel)' != ''">
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\x86\libcrypto.so" />
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\x86\libssl.so" />
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'x86' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\x86\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\x86\libssl.so" />
 		</ItemGroup>
-		<ItemGroup Condition="'$(PlatformToolset)' == 'Gcc_4_9' And '$(Platform)' == 'x64' And '$(AndroidAPILevel)' != ''">
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\x64\libcrypto.so" />
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\x64\libssl.so" />
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'x64' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\x86_64\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\x86_64\libssl.so" />
 		</ItemGroup>
-		<ItemGroup Condition="'$(PlatformToolset)' == 'Gcc_4_9' And '$(Platform)' == 'ARM' And '$(AndroidAPILevel)' != ''">
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\armeabi\libcrypto.so" />
-		<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\armeabi\libssl.so" />
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'ARM' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\armeabi\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\armeabi\libssl.so" />
 		</ItemGroup>
-		<ItemGroup Condition="'$(PlatformToolset)' == 'Gcc_4_9' And '$(Platform)' == 'ARM64' And '$(AndroidAPILevel)' != ''">
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\arm64-v8a\libcrypto.so" />
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\arm64-v8a\libssl.so" />
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'ARM64' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\arm64-v8a\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\arm64-v8a\libssl.so" />
 		</ItemGroup>
-		<ItemGroup Condition="'$(PlatformToolset)' == 'Gcc_4_9' And '$(Platform)' == 'mips' And '$(AndroidAPILevel)' != ''">
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\mips\libcrypto.so" />
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\mips\libssl.so" />
-		</ItemGroup>
-		<ItemGroup Condition="'$(PlatformToolset)' == 'Gcc_4_9' And '$(Platform)' == 'armeabi-v7a' And '$(AndroidAPILevel)' != ''">
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\armeabi-v7a\libcrypto.so" />
-			<Link Include="$(MSBuildThisFileDirectory)lib\native\android\gcc\armeabi-v7a\libssl.so" />
-		</ItemGroup>
-    <Error Condition="'$(PlatformToolset)' != 'Gcc_4_9' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package only contains binaries for Gcc 4.9."/>
+		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'mips64' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support mips64 yet." />
+		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'mips' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support mips yet." />
+		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'armeabi-v7a' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support armeabi-v7a yet." />
+		<Error Condition="'$(PlatformToolset)' != 'Clang_3_6' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package only contains binaries for Clang_3_6. GCC has been depreciated for ndk development, USE CLANG" />
   </Target>
 </Project>

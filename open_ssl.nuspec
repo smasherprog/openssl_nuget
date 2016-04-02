@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>open_ssl</id>
-	<title>Openssl 1.0.2g</title>
     <version>1.0.2.01</version>
+    <title>Openssl 1.0.2g</title>
     <authors>Scott Lee</authors>
     <owners>Scott Lee</owners>
     <licenseUrl>https://www.openssl.org/source/license.html</licenseUrl>
@@ -12,11 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>1.0.2g OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols.</description>
     <summary>1.0.2g OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols.</summary>
-
-    <releaseNotes></releaseNotes>
+    <releaseNotes />
     <copyright>Copyright 2016</copyright>
-    <tags>openssl native C++ v120 windesktop dyn rt-dyn msvcstl static v140 Android Gcc</tags>
-    <dependencies>
-    </dependencies>
+    <tags>openssl native C++ v120 mt md v140 Android Clang armeabi x86 x86_64</tags>
   </metadata>
 </package>

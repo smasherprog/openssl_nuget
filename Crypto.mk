@@ -609,22 +609,21 @@ common_c_includes := \
   
 armeabi_c_flags := \
   -DAES_ASM \
-  -DGHASH_ASM \
   -DOPENSSL_BN_ASM_GF2m \
   -DOPENSSL_BN_ASM_MONT \
   -DSHA1_ASM \
   -DSHA256_ASM \
   -DSHA512_ASM \
-
+  
 armeabi_src_files := \
 	crypto/aes/asm/aes-armv4.S \
 	crypto/bn/asm/armv4-gf2m.S \
 	crypto/bn/asm/armv4-mont.S \
-	crypto/modes/asm/ghash-armv4.S \
 	crypto/sha/asm/sha1-armv4-large.S \
 	crypto/sha/asm/sha256-armv4.S \
 	crypto/sha/asm/sha512-armv4.S \
-	
+	crypto/armcap.c \
+		
 armeabi_exclude_files := \
 	crypto/aes/aes_core.c \
 
@@ -660,7 +659,8 @@ x86_c_flags := \
   -DSHA1_ASM \
   -DSHA256_ASM \
   -DSHA512_ASM \
-
+  -DOPENSSL_NO_INLINE_ASM \
+  
 x86_src_files := \
 	crypto/aes/asm/aes-586.S \
 	crypto/aes/asm/aesni-x86.S \
@@ -678,7 +678,6 @@ x86_src_files := \
 	crypto/sha/asm/sha256-586.S \
 	crypto/sha/asm/sha512-586.S \
 	crypto/x86cpuid.S \
-
 
 x86_exclude_files := \
 	crypto/aes/aes_cbc.c \
@@ -702,6 +701,7 @@ x86_64_c_flags := \
   -DSHA1_ASM \
   -DSHA256_ASM \
   -DSHA512_ASM \
+  -DOPENSSL_NO_INLINE_ASM \
   
 x86_64_src_files := \
 	crypto/aes/asm/aes-x86_64.S \
