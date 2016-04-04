@@ -108,7 +108,7 @@ echo Building Android Libraries
 call ndk-build
 cd ..
 
-call xcopy "%cd%\openssl-android\libs" "%cd%\openssl\lib\native\andriod\clang\" /E /H /K /y
+call xcopy "%cd%\openssl-android\libs" "%cd%\openssl\lib\native\android\clang\" /E /H /K /y
 
 goto:eof
 
