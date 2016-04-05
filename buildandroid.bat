@@ -27,21 +27,43 @@ copy opensslconf.h openssl-android\include\openssl\
 cd openssl-android
 
 echo Generate arm asm
-call:gen_asm_arm "crypto/aes/asm/aes-armv4.pl"
-call:gen_asm_arm "crypto/bn/asm/armv4-gf2m.pl"
-call:gen_asm_arm "crypto/bn/asm/armv4-mont.pl"
-call:gen_asm_arm "crypto/modes/asm/ghash-armv4.pl"
-call:gen_asm_arm "crypto/sha/asm/sha1-armv4-large.pl"
-call:gen_asm_arm "crypto/sha/asm/sha256-armv4.pl"
-call:gen_asm_arm "crypto/sha/asm/sha512-armv4.pl"
+call:gen_asm_arm crypto/aes/asm/aes-mips.pl
+call:gen_asm_arm crypto/aes/asm/aes-armv4.pl
+call:gen_asm_arm crypto/aes/asm/bsaes-armv7.pl
+call:gen_asm_arm crypto/aes/asm/aesv8-armx.pl
+call:gen_asm_arm crypto/bn/asm/armv4-gf2m.pl
+call:gen_asm_arm crypto/bn/asm/armv4-mont.pl
+call:gen_asm_arm crypto/modes/asm/ghash-armv4.pl
+call:gen_asm_arm crypto/modes/asm/ghashv8-armx.pl
+call:gen_asm_arm crypto/sha/asm/sha1-armv4-large.pl
+call:gen_asm_arm crypto/sha/asm/sha256-armv4.pl
+call:gen_asm_arm crypto/sha/asm/sha512-armv4.pl
 
 echo Generate mips asm
   call:gen_asm_mips crypto/aes/asm/aes-mips.pl
   call:gen_asm_mips crypto/bn/asm/mips.pl crypto/bn/asm/bn-mips.S
   call:gen_asm_mips crypto/bn/asm/mips-mont.pl
   call:gen_asm_mips crypto/sha/asm/sha1-mips.pl
-  call:gen_asm_mips crypto/sha/asm/sha512-mips.pl crypto/sha/asm/sha256-mips.S
-
+  cd crypto/sha/asm/
+  call:gen_asm_mips sha512-mips.pl sha256-mips.S
+  call:gen_asm_mips sha512-mips.pl sha512-mips.S
+  cd ..
+  cd ..
+  cd ..
+ 
+ echo Generate mips64 asm 
+  
+  call:gen_asm_mips64 crypto/bn/asm/mips.pl crypto/bn/asm/mips64.S
+  call:gen_asm_mips64 crypto/bn/asm/mips-mont.pl crypto/bn/asm/mips-mont64.S
+  call:gen_asm_mips64 crypto/sha/asm/sha1-mips.pl crypto/sha/asm/sha1-mips64.S
+  cd crypto/sha/asm/
+  call:gen_asm_mips64 sha512-mips.pl sha256-mips64.S
+  call:gen_asm_mips64 sha512-mips.pl sha512-mips64.S
+  cd ..
+  cd ..
+  cd ..
+	
+	
 echo Generate x86 asm
   call:gen_asm_x86 crypto/x86cpuid.pl
   call:gen_asm_x86 crypto/aes/asm/aes-586.pl
@@ -59,6 +81,11 @@ echo Generate x86 asm
   call:gen_asm_x86 crypto/des/asm/des-586.pl
   call:gen_asm_x86 crypto/des/asm/crypt586.pl
   call:gen_asm_x86 crypto/bf/asm/bf-586.pl
+	call:gen_asm_x86 crypto/cast/asm/cast-586.pl
+	call:gen_asm_x86 crypto/rc4/asm/rc4-586.pl
+	call:gen_asm_x86 crypto/ripemd/asm/rmd-586.pl
+	call:gen_asm_x86 crypto/rc5/asm/rc5-586.pl
+	call:gen_asm_x86 crypto/camellia/asm/cmll-x86.pl
 
 echo Generate x86_64 asm
   call:gen_asm_x86_64 crypto/x86_64cpuid.pl
@@ -85,7 +112,9 @@ echo Generate x86_64 asm
   call:gen_asm_x86_64 crypto/bn/asm/x86_64-mont5.pl
   call:gen_asm_x86_64 crypto/rc4/asm/rc4-x86_64.pl
   call:gen_asm_x86_64 crypto/rc4/asm/rc4-md5-x86_64.pl
-
+  call:gen_asm_x86_64 crypto/ec/asm/ecp_nistz256-x86_64.pl
+  call:gen_asm_x86_64 crypto/camellia/asm/cmll-x86_64.pl
+ 
 echo Generate mac_ia32 asm
   call:gen_asm_mac_ia32 crypto/x86cpuid.pl
   call:gen_asm_mac_ia32 crypto/aes/asm/aes-586.pl
@@ -149,5 +178,14 @@ SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=.S%
 
-call perl "%infile%" o32 > "%outfile%"
+call perl "%infile%" o32 "%outfile%" > "%outfile%"
+goto:eof
+
+
+:gen_asm_mips64  
+SET infile=%~1
+SET outfile=%~2
+IF "%2"=="" SET outfile=%infile:.pl=.S%
+
+call perl "%infile%" 64 "%outfile%" > "%outfile%"
 goto:eof

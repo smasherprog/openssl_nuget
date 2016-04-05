@@ -617,13 +617,18 @@ armeabi_c_flags := \
   
 armeabi_src_files := \
 	crypto/aes/asm/aes-armv4.S \
+	crypto/aes/asm/bsaes-armv7.S \
+	crypto/aes/asm/aesv8-armx.S \
 	crypto/bn/asm/armv4-gf2m.S \
 	crypto/bn/asm/armv4-mont.S \
 	crypto/sha/asm/sha1-armv4-large.S \
 	crypto/sha/asm/sha256-armv4.S \
 	crypto/sha/asm/sha512-armv4.S \
+	crypto/modes/asm/ghash-armv4.S \
+	crypto/modes/asm/ghashv8-armx.S \
 	crypto/armcap.c \
-		
+	crypto/armv4cpuid.c \
+
 armeabi_exclude_files := \
 	crypto/aes/aes_core.c \
 
@@ -639,11 +644,31 @@ armeabi-v7a-hard_src_files :=
 
 armeabi-v7a-hard_exclude_files := 
 	
-arm64-v8a_c_flags := 
+arm64-v8a_c_flags := \
+  -DAES_ASM \
+  -DOPENSSL_BN_ASM_GF2m \
+  -DOPENSSL_BN_ASM_MONT \
+  -DSHA1_ASM \
+  -DSHA256_ASM \
+  -DSHA512_ASM \
+  
+arm64-v8a_src_files := \
+	crypto/aes/asm/aes-armv4.S \
+	crypto/aes/asm/bsaes-armv7.S \
+	crypto/aes/asm/aesv8-armx.S \
+	crypto/bn/asm/armv4-gf2m.S \
+	crypto/bn/asm/armv4-mont.S \
+	crypto/sha/asm/sha1-armv4-large.S \
+	crypto/sha/asm/sha256-armv4.S \
+	crypto/sha/asm/sha512-armv4.S \
+	crypto/modes/asm/ghash-armv4.S \
+	crypto/modes/asm/ghashv8-armx.S \
+	crypto/armcap.c \
+	crypto/arm64cpuid.c \
 	
-arm64-v8a_src_files := 
-
-arm64-v8a_exclude_files := 
+	
+arm64-v8a_exclude_files := \
+	crypto/aes/aes_core.c \
 	
 x86_c_flags := \
   -DAES_ASM \
@@ -662,6 +687,7 @@ x86_c_flags := \
   -DOPENSSL_NO_INLINE_ASM \
   
 x86_src_files := \
+	crypto/x86cpuid.S \
 	crypto/aes/asm/aes-586.S \
 	crypto/aes/asm/aesni-x86.S \
 	crypto/aes/asm/vpaes-x86.S \
@@ -677,7 +703,12 @@ x86_src_files := \
 	crypto/sha/asm/sha1-586.S \
 	crypto/sha/asm/sha256-586.S \
 	crypto/sha/asm/sha512-586.S \
-	crypto/x86cpuid.S \
+	crypto/cast/asm/cast-586.S \
+	crypto/rc4/asm/rc4-586.S \
+	crypto/ripemd/asm/rmd-586.S \
+	crypto/rc5/asm/rc5-586.S \
+	crypto/camellia/asm/cmll-x86.S \
+	
 
 x86_exclude_files := \
 	crypto/aes/aes_cbc.c \
@@ -687,7 +718,14 @@ x86_exclude_files := \
 	crypto/des/des_enc.c \
 	crypto/des/fcrypt_b.c \
 	crypto/mem_clr.c \
-
+	crypto/cast/c_enc.c \
+	crypto/rc4/rc4_enc.c \
+	crypto/rc4/rc4_skey.c \
+	crypto/rc4/rc4_skey.c \
+	crypto/camellia/camellia.c \
+	crypto/camellia/cmll_misc.c \
+	crypto/camellia/cmll_cbc.c \
+	
 x86_64_c_flags := \
   -DAES_ASM \
   -DDES_PTR \
@@ -728,6 +766,8 @@ x86_64_src_files := \
 	crypto/sha/asm/sha256-mb-x86_64.S \
 	crypto/sha/asm/sha512-x86_64.S \
 	crypto/x86_64cpuid.S \
+	crypto/ec/asm/ecp_nistz256-x86_64.S \
+	crypto/camellia/asm/cmll-x86_64 \
 
 x86_64_exclude_files := \
 	crypto/aes/aes_cbc.c \
@@ -739,21 +779,29 @@ x86_64_exclude_files := \
 mips_c_flags := \
   -DAES_ASM \
   -DOPENSSL_BN_ASM_MONT \
-  -DSHA1_ASM \
+ -DSHA1_ASM \
   -DSHA256_ASM \
-
+  -DOPENSSL_NO_INLINE_ASM \
+  
 mips_src_files := \
 	crypto/aes/asm/aes-mips.S \
 	crypto/bn/asm/bn-mips.S \
 	crypto/bn/asm/mips-mont.S \
 	crypto/sha/asm/sha1-mips.S \
-	crypto/sha/asm/sha256-mips.S 
+	crypto/sha/asm/sha256-mips.S \
 
 mips_exclude_files := \
 	crypto/aes/aes_core.c \
 	crypto/bn/bn_asm.c \
 
-  target_arch := $(TARGET_ARCH_ABI)
+mips64_c_flags := \
+  -DOPENSSL_NO_INLINE_ASM \
+
+mips64_src_files := \
+
+mips64_exclude_files := \
+
+ target_arch := $(TARGET_ARCH_ABI)
   
 
 target_c_flags    := $(common_c_flags) $($(target_arch)_c_flags)

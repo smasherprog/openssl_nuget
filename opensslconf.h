@@ -77,10 +77,6 @@ extern "C" {
 
 #endif /* OPENSSL_DOING_MAKEDEPEND */
 
-#ifndef OPENSSL_CPUID_OBJ
-# define OPENSSL_CPUID_OBJ
-#endif
-
 #ifndef OPENSSL_THREADS
 # define OPENSSL_THREADS
 #endif
