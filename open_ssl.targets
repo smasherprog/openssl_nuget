@@ -28,7 +28,7 @@
       <AdditionalLibraryDirectories Condition="'$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\lib\native\v140\windesktop\msvcstl\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <Target Name="libjpeg_turbo_android" BeforeTargets="Link" DependsOnTargets="$(ComputeLinkInputsTargets)">
+  <Target Name="openssl_android_target" BeforeTargets="Link" DependsOnTargets="$(ComputeLinkInputsTargets)">
 		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'x86' And '$(AndroidAPILevel)' != ''">
 			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\x86\libcrypto.so" />
 			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\x86\libssl.so" />
@@ -53,7 +53,11 @@
 			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\mips\libcrypto.so" />
 			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\mips\libssl.so" />
 		</ItemGroup>
-		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'armeabi-v7a' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support armeabi-v7a yet." />
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'armeabi-v7a' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\armeabi-v7a\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\armeabi-v7a\libssl.so" />
+		</ItemGroup>
+
 		<Error Condition="'$(PlatformToolset)' != 'Clang_3_6' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package only contains binaries for Clang_3_6. GCC has been depreciated for ndk development, USE CLANG" />
   </Target>
 </Project>

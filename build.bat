@@ -11,3 +11,5 @@ call %SEVENZIP% x "%var%/%foundfile%" -aoa
 call del %foundfile%
 
 start cmd.exe /k "buildandroid.bat "%filename%""
+start cmd.exe /k "build_v120.bat "%filename%""
+start cmd.exe /k "build_v140.bat "%filename%""
