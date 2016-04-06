@@ -614,6 +614,7 @@ armeabi_c_flags := \
   -DSHA1_ASM \
   -DSHA256_ASM \
   -DSHA512_ASM \
+  -DOPENSSL_CPUID_OBJ \
   
 armeabi_src_files := \
 	crypto/aes/asm/aes-armv4.S \
@@ -624,14 +625,14 @@ armeabi_src_files := \
 	crypto/sha/asm/sha1-armv4-large.S \
 	crypto/sha/asm/sha256-armv4.S \
 	crypto/sha/asm/sha512-armv4.S \
-	crypto/modes/asm/ghash-armv4.S \
-	crypto/modes/asm/ghashv8-armx.S \
+	crypto/armv4cpuid.S \
 	crypto/armcap.c \
-	crypto/armv4cpuid.c \
+
 
 armeabi_exclude_files := \
 	crypto/aes/aes_core.c \
-
+	crypto/mem_clr.c \
+		
 armeabi-v7a_c_flags := 
 
 armeabi-v7a_src_files := 
@@ -645,31 +646,17 @@ armeabi-v7a-hard_src_files :=
 armeabi-v7a-hard_exclude_files := 
 	
 arm64-v8a_c_flags := \
-  -DAES_ASM \
-  -DOPENSSL_BN_ASM_GF2m \
-  -DOPENSSL_BN_ASM_MONT \
   -DSHA1_ASM \
   -DSHA256_ASM \
   -DSHA512_ASM \
-  
+	
 arm64-v8a_src_files := \
-	crypto/aes/asm/aes-armv4.S \
-	crypto/aes/asm/bsaes-armv7.S \
-	crypto/aes/asm/aesv8-armx.S \
-	crypto/bn/asm/armv4-gf2m.S \
-	crypto/bn/asm/armv4-mont.S \
-	crypto/sha/asm/sha1-armv4-large.S \
-	crypto/sha/asm/sha256-armv4.S \
-	crypto/sha/asm/sha512-armv4.S \
-	crypto/modes/asm/ghash-armv4.S \
-	crypto/modes/asm/ghashv8-armx.S \
-	crypto/armcap.c \
-	crypto/arm64cpuid.c \
-	
-	
+	crypto/sha/asm/sha1-armv8.S \
+	crypto/sha/asm/sha256-armv8.S \
+	crypto/sha/asm/sha512-armv8.S \
+		
 arm64-v8a_exclude_files := \
-	crypto/aes/aes_core.c \
-	
+
 x86_c_flags := \
   -DAES_ASM \
   -DDES_PTR \

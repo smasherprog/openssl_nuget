@@ -45,8 +45,14 @@
 			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\arm64-v8a\libcrypto.so" />
 			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\arm64-v8a\libssl.so" />
 		</ItemGroup>
-		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'mips64' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support mips64 yet." />
-		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'mips' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support mips yet." />
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'mips64' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\mips64\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\mips64\libssl.so" />
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'mips' And '$(AndroidAPILevel)' != ''">
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\mips\libcrypto.so" />
+			<Link Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\mips\libssl.so" />
+		</ItemGroup>
 		<Error Condition="'$(PlatformToolset)' == 'Clang_3_6' And '$(Platform)' == 'armeabi-v7a' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package does not yet support armeabi-v7a yet." />
 		<Error Condition="'$(PlatformToolset)' != 'Clang_3_6' And '$(AndroidAPILevel)' != ''" Text="The Openssl NuGet package only contains binaries for Clang_3_6. GCC has been depreciated for ndk development, USE CLANG" />
   </Target>

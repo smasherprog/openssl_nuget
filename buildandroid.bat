@@ -26,6 +26,7 @@ cd ..
 copy opensslconf.h openssl-android\include\openssl\
 cd openssl-android
 
+
 echo Generate arm asm
 call:gen_asm_arm crypto/aes/asm/aes-mips.pl
 call:gen_asm_arm crypto/aes/asm/aes-armv4.pl
@@ -39,6 +40,11 @@ call:gen_asm_arm crypto/sha/asm/sha1-armv4-large.pl
 call:gen_asm_arm crypto/sha/asm/sha256-armv4.pl
 call:gen_asm_arm crypto/sha/asm/sha512-armv4.pl
 
+call:gen_asm_arm crypto/sha/asm/sha1-armv8.pl
+call:gen_asm_arm crypto/sha/asm/sha512-armv8.pl crypto/sha/asm/sha512-armv8.S
+call:gen_asm_arm crypto/sha/asm/sha512-armv8.pl crypto/sha/asm/sha256-armv8.S
+
+  
 echo Generate mips asm
   call:gen_asm_mips crypto/aes/asm/aes-mips.pl
   call:gen_asm_mips crypto/bn/asm/mips.pl crypto/bn/asm/bn-mips.S
@@ -142,50 +148,62 @@ call xcopy "%cd%\openssl-android\libs" "%cd%\openssl\lib\native\android\clang\" 
 goto:eof
 
 :gen_asm_mac_ia32  
+SETLOCAL
 SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=-mac.S%
 
 call perl "%infile%" macosx > "%outfile%"
+ENDLOCAL
 goto:eof
 
 :gen_asm_x86_64  
+SETLOCAL
 SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=.S%
 
 call perl "%infile%" elf "%outfile%" > "%outfile%"
+ENDLOCAL
 goto:eof
 
 :gen_asm_x86  
+SETLOCAL
 SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=.S%
 
 call perl "%infile%" elf -fPIC > "%outfile%"
+ENDLOCAL
 goto:eof
 
 :gen_asm_arm  
+SETLOCAL
 SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=.S%
 
-call perl "%infile%" > "%outfile%"
+call perl "%infile%" elf "%outfile%" > "%outfile%"
+ENDLOCAL
 goto:eof
 
 :gen_asm_mips  
+SETLOCAL
 SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=.S%
 
 call perl "%infile%" o32 "%outfile%" > "%outfile%"
+ENDLOCAL
 goto:eof
 
 
 :gen_asm_mips64  
+SETLOCAL
 SET infile=%~1
 SET outfile=%~2
 IF "%2"=="" SET outfile=%infile:.pl=.S%
 
 call perl "%infile%" 64 "%outfile%" > "%outfile%"
+ENDLOCAL
 goto:eof
