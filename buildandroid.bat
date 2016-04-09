@@ -1,30 +1,28 @@
-set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
-set foundfile=""
 SET var=%cd%
-for %%g in (*.gz) do set foundfile=%%~ng
-set filename=%foundfile:.tar=%
+SET dst_src=openssl-android-src
+set filename=%~1
 
-call xcopy "%var%\%filename%" "%var%\openssl-android\" /E /H /K /y
+call xcopy "%var%\%filename%" "%var%\%dst_src%\" /E /H /K /y
 
-copy Android.mk openssl-android\
-copy android-config.mk openssl-android\
-copy build-config.mk openssl-android\
-copy Crypto.mk openssl-android\
-copy Ssl.mk openssl-android\
-copy Android_Build_Assembly.bat openssl-android\
-copy AndroidManifest.xml openssl-android\
+copy Android.mk %dst_src%\
+copy android-config.mk %dst_src%\
+copy build-config.mk %dst_src%\
+copy Crypto.mk %dst_src%\
+copy Ssl.mk %dst_src%\
+copy Android_Build_Assembly.bat %dst_src%\
+copy AndroidManifest.xml %dst_src%\
 
-mkdir openssl-android\jni
-mkdir openssl-android\include\openssl
-copy Application.mk openssl-android\jni\
-cd openssl-android
+mkdir %dst_src%\jni
+mkdir %dst_src%\include\openssl
+copy Application.mk %dst_src%\jni\
+cd %dst_src%
 
 FOR /R %%G in (*.h) DO (
 	call copy "%%G" "%cd%\include\openssl\" 
 )
 cd ..
-copy opensslconf.h openssl-android\include\openssl\
-cd openssl-android
+copy opensslconf.h %dst_src%\include\openssl\
+cd %dst_src%
 
 
 echo Generate arm asm
@@ -143,8 +141,19 @@ echo Building Android Libraries
 call ndk-build
 cd ..
 
-call xcopy "%cd%\openssl-android\libs" "%cd%\openssl\lib\native\android\clang\" /E /H /K /y
 
+call rd /s /q "%cd%\%dst_src%\obj\local\arm64-v8a\objs"
+call rd /s /q "%cd%\%dst_src%\obj\local\armeabi\objs"
+call rd /s /q "%cd%\%dst_src%\obj\local\armeabi-v7a\objs"
+call rd /s /q "%cd%\%dst_src%\obj\local\mips64\objs"
+call rd /s /q "%cd%\%dst_src%\obj\local\mips\objs"
+call rd /s /q "%cd%\%dst_src%\obj\local\x86\objs"
+call rd /s /q "%cd%\%dst_src%\obj\local\x86_64\objs"
+
+call xcopy "%cd%\%dst_src%\obj\local" "%cd%\openssl_android_nuget\lib\native\android\clang\" /E /H /K /y
+call rd /s /q "%cd%\%dst_src%"
+
+exit
 goto:eof
 
 :gen_asm_mac_ia32  

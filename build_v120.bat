@@ -1,19 +1,20 @@
 SET var=%cd%
 set filename=%~1
+set ofile=openssl_windows_nuget
 
 if exist "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/vcvars32.bat" (
 	call xcopy "%var%\%filename%" "%var%\openssl-src-win32-VS2013\" /E /H /K /y
 	call xcopy "%var%\%filename%" "%var%\openssl-src-win64-VS2013\" /E /H /K /y
 	call copy nasm.exe %var%\openssl-src-win32-VS2013\
 	call copy nasm.exe %var%\openssl-src-win64-VS2013\
-	call:build_32 openssl-src-win32-VS2013 VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Release\mt" "/MT" "%var%\openssl\build\native\include\"
-	call:build_32 openssl-src-win32-VS2013 VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Release\md" "/MD" "%var%\openssl\build\native\include\"
-	call:build_32 openssl-src-win32-VS2013 debug-VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Debug\mt" "/MT" "%var%\openssl\build\native\include\"
-	call:build_32 openssl-src-win32-VS2013 debug-VC-WIN32 "%var%\openssl\lib\native\v120\windesktop\msvcstl\Win32\Debug\md" "/MD" "%var%\openssl\build\native\include\" 
-	call:build_64 openssl-src-win64-VS2013 VC-WIN64A "%var%\openssl\lib\native\v120\windesktop\msvcstl\x64\Release\mt" "/MT" "%var%\openssl\build\native\include\"
-	call:build_64 openssl-src-win64-VS2013 VC-WIN64A "%var%\openssl\lib\native\v120\windesktop\msvcstl\x64\Release\md" "/MD" "%var%\openssl\build\native\include\"
-	call:build_64 openssl-src-win64-VS2013 debug-VC-WIN64A "%var%\openssl\lib\native\v120\windesktop\msvcstl\x64\Debug\mt" "/MT" "%var%\openssl\build\native\include\"
-	call:build_64 openssl-src-win64-VS2013 debug-VC-WIN64A "%var%\openssl\lib\native\v120\windesktop\msvcstl\x64\Debug\md" "/MD" "%var%\openssl\build\native\include\"
+	call:build_32 openssl-src-win32-VS2013 VC-WIN32 "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\Win32\Release\mt" "/MT"
+	call:build_32 openssl-src-win32-VS2013 VC-WIN32 "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\Win32\Release\md" "/MD"
+	call:build_32 openssl-src-win32-VS2013 debug-VC-WIN32 "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\Win32\Debug\mt" "/MT"
+	call:build_32 openssl-src-win32-VS2013 debug-VC-WIN32 "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\Win32\Debug\md" "/MD"
+	call:build_64 openssl-src-win64-VS2013 VC-WIN64A "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\x64\Release\mt" "/MT"
+	call:build_64 openssl-src-win64-VS2013 VC-WIN64A "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\x64\Release\md" "/MD"
+	call:build_64 openssl-src-win64-VS2013 debug-VC-WIN64A "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\x64\Debug\mt" "/MT"
+	call:build_64 openssl-src-win64-VS2013 debug-VC-WIN64A "%var%\%ofile%\lib\native\v120\windesktop\msvcstl\x64\Debug\md" "/MD"
 	echo Deleteing win32 folder
 	call rd /s /q "%var%\openssl-src-win32-VS2013\"
 	echo Deleteing win64 folder
@@ -40,7 +41,6 @@ call nmake -f ms/nt.mak
 call nmake -f ms/nt.mak install
 call rd /s /q "%v4%\ssl"
 call rd /s /q "%v4%\bin"
-call xcopy "%v4%\include" %5 /E /H /K /y
 call rd /s /q "%v4%\include"
 call move /y "%v4%\lib\*.lib" "%v4%\"
 call rd /s /q "%v4%\lib"
@@ -66,7 +66,6 @@ call nmake -f ms/nt.mak
 call nmake -f ms/nt.mak install
 call rd /s /q "%v4%\ssl"
 call rd /s /q "%v4%\bin"
-call xcopy "%v4%\include" %5 /E /H /K /y
 call rd /s /q "%v4%\include"
 call move /y "%v4%\lib\*.lib" "%v4%\"
 call rd /s /q "%v4%\lib"

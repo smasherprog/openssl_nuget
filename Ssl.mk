@@ -114,10 +114,19 @@ include $(LOCAL_PATH)/android-config.mk
 LOCAL_SRC_FILES += $(target_src_files)
 LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
-LOCAL_SHARED_LIBRARIES += libcrypto
+LOCAL_SHARED_LIBRARIES += libcrypto_md
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libssl
+LOCAL_MODULE := libssl_md
 include $(BUILD_SHARED_LIBRARY)
 
 
+include $(CLEAR_VARS)
+include $(LOCAL_PATH)/android-config.mk
 
+LOCAL_SRC_FILES += $(target_src_files)
+LOCAL_CFLAGS += $(target_c_flags)
+LOCAL_C_INCLUDES += $(target_c_includes)
+LOCAL_SHARED_LIBRARIES += libcrypto_mt
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := libssl_mt
+include $(BUILD_STATIC_LIBRARY)
