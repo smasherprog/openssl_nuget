@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>open_ssl</id>
-    <version>1.0.2.07</version>
-    <title>Openssl 1.0.2g</title>
+    <version>1.0.2.08</version>
+    <title>Openssl 1.0.2h</title>
     <authors>Scott Lee</authors>
     <owners>Scott Lee</owners>
     <licenseUrl>https://www.openssl.org/source/license.html</licenseUrl>
@@ -17,8 +17,8 @@
     <tags>openssl native C++ v120 mt md v140 Android Clang x86 x86_64 arm64-v8a armeabi armeabi-v7a mips mips64</tags>
 	<dependencies>		
 		<group targetFramework="native0.0">		
-			<dependency id="open_ssl_windows" version="[1.0.2.0]" />		
-			<dependency id="open_ssl_android" version="[1.0.2.11]" />			
+			<dependency id="open_ssl_windows" version="[1.0.2.10]" />		
+			<dependency id="open_ssl_android" version="[1.0.2.12]" />			
 		</group>		
 	</dependencies>
 	</metadata>
