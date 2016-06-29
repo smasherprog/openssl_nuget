@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>open_ssl_android</id>
-    <version>1.0.2.12</version>
+    <version>1.0.2.13</version>
     <title>Openssl 1.0.2h</title>
     <authors>Scott Lee</authors>
     <owners>Scott Lee</owners>
