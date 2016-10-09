@@ -639,11 +639,6 @@ armeabi-v7a_src_files :=
 
 armeabi-v7a_exclude_files := 
 
-armeabi-v7a-hard_c_flags := 
-
-armeabi-v7a-hard_src_files := 
-
-armeabi-v7a-hard_exclude_files := 
 	
 arm64-v8a_c_flags := \
   -DSHA1_ASM \
@@ -754,7 +749,6 @@ x86_64_src_files := \
 	crypto/sha/asm/sha512-x86_64.S \
 	crypto/x86_64cpuid.S \
 	crypto/ec/asm/ecp_nistz256-x86_64.S \
-	crypto/camellia/asm/cmll-x86_64 \
 
 x86_64_exclude_files := \
 	crypto/aes/aes_cbc.c \
@@ -807,6 +801,7 @@ LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libcrypto_md
+LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)

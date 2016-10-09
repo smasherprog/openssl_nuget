@@ -139,8 +139,8 @@ extern "C" {
 
 #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
 #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
-#define ENGINESDIR "C:\\Users\\scott\\Documents\\GitHub\\openssl_nuget\\openssl\\lib\\native\\v140\\windesktop\\msvcstl\\x64\\Debug\\md/lib/engines"
-#define OPENSSLDIR "C:\\Users\\scott\\Documents\\GitHub\\openssl_nuget\\openssl\\lib\\native\\v140\\windesktop\\msvcstl\\x64\\Debug\\md/ssl"
+#define ENGINESDIR "/usr/local/ssl/lib/engines"
+#define OPENSSLDIR "/usr/local/ssl"
 #endif
 #endif
 

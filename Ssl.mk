@@ -117,6 +117,7 @@ LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_SHARED_LIBRARIES += libcrypto_md
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libssl_md
+LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
 include $(BUILD_SHARED_LIBRARY)
 
 

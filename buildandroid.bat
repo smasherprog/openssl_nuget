@@ -138,7 +138,7 @@ echo Generate mac_ia32 asm
   call:gen_asm_mac_ia32 crypto/bf/asm/bf-586.pl
   
 echo Building Android Libraries
-call ndk-build
+call ndk-build -j4
 cd ..
 
 
