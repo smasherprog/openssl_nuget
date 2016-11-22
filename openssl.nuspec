@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>open_ssl</id>
-    <version>1.0.2.09</version>
-    <title>Openssl 1.0.2h</title>
+    <version>1.1.0</version>
+    <title>Openssl 1.1.0c</title>
     <authors>Scott Lee</authors>
     <owners>Scott Lee</owners>
     <licenseUrl>https://www.openssl.org/source/license.html</licenseUrl>
@@ -14,11 +14,12 @@
     <summary>1.0.2g OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols.</summary>
     <releaseNotes />
     <copyright>Copyright 2016</copyright>
-    <tags>openssl native C++ v120 mt md v140 Android Clang x86 x86_64 arm64-v8a armeabi armeabi-v7a mips mips64</tags>
+    <tags>openssl native C++ static dynamic v140 v120 Android Clang x86 x86_64 arm64-v8a armeabi armeabi-v7a</tags>
 	<dependencies>		
 		<group targetFramework="native0.0">		
-			<dependency id="open_ssl_windows" version="[1.0.2.11]" />		
-			<dependency id="open_ssl_android" version="[1.0.2.13]" />			
+			<dependency id="openssl.v120" version="[1.1.0]" />
+			<dependency id="openssl.v140" version="[1.1.0]" />
+			<dependency id="openssl.android" version="[1.1.0]" />	
 		</group>		
 	</dependencies>
 	</metadata>

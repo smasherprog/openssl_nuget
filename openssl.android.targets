@@ -1,0 +1,50 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+	<Target Name="openssl_android_linking" BeforeTargets="Link;Lib" DependsOnTargets="$(ComputeLinkInputsTargets)">
+		
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'x86' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'DynamicLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\x86\openssl.so" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\x86\openssl.so" />
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\x86\openssl.so"/> 
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\x86\openssl.so"/> 
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'x64' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'DynamicLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\x86_64\openssl.so" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\x86_64\openssl.so" />
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\x86_64\openssl.so"/> 
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\x86_64\openssl.so"/> 
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'ARM' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'DynamicLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\armeabi\openssl.so" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\armeabi\openssl.so" />
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\armeabi\openssl.so"/> 
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\armeabi\openssl.so"/> 
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'ARM64' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'DynamicLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\arm64-v8a\openssl.so" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\arm64-v8a\openssl.so" />
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\arm64-v8a\openssl.so"/> 
+			<MyPackageSourceFiles Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\arm64-v8a\openssl.so"/> 
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'x86' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'StaticLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\x86\openssl.a" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\x86\openssl.a" />
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'x64' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'StaticLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\x86_64\openssl.a" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\x86_64\openssl.a" />
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'ARM' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'StaticLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\armeabi\openssl.a" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\armeabi\openssl.a" />
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'Clang_3_8' And '$(Platform)' == 'ARM64' And '$(AndroidAPILevel)' != '' And '$(ConfigurationType)' == 'StaticLibrary'">
+			<Link Condition="'$(Configuration)' == 'Debug'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Debug\arm64-v8a\openssl.a" />
+			<Link Condition="'$(Configuration)' == 'Release'" Include="$(MSBuildThisFileDirectory)..\..\lib\native\android\clang\Release\arm64-v8a\openssl.a" />
+		</ItemGroup>
+		<Copy SourceFiles="@(MyPackageSourceFiles)" DestinationFolder="$(OutputPath)" /> 
+		<Error Condition="'$(PlatformToolset)' != 'Clang_3_8' And '$(AndroidAPILevel)' != ''" Text="The openssl NuGet package only contains binaries for Clang_3_8. GCC has been depreciated for ndk development, USE CLANG" />
+		<Error Condition="'$(UseOfStl)' != 'c++_static' And '$(UseOfStl)' != 'c++_shared' And '$(AndroidAPILevel)' != ''" Text="openssl requires linking against the LLVM libc++. Please set Project Properties -> Configuration Properties -> General -> Use of STL to be 'LLVM libc++'."  />
+
+	</Target>
+</Project>

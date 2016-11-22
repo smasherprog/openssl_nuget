@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>openssl.v140</id>
+		<version>1.1.0</version>
+		<title>Openssl 1.1.0c</title>
+		<authors>Scott Lee</authors>
+		<owners>Scott Lee</owners>
+		<licenseUrl>https://www.openssl.org/source/license.html</licenseUrl>
+		<projectUrl>https://www.openssl.org/</projectUrl>
+		<iconUrl>http://openssl.com/images/openssl-logo.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols.</description>
+		<summary>OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols.</summary>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags>openssl native C++ v140 x86 x64 static shared Release Debug</tags>
+	</metadata>
+</package>

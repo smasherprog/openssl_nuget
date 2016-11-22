@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="openssl_v120_linking" BeforeTargets="Link;Lib" DependsOnTargets="$(ComputeLinkInputsTargets)">
+		<PropertyGroup Condition="'$(MYRuntimeLibrary)' == ''">
+			<MYRuntimeLibrary>%(ClCompile.RuntimeLibrary)</MYRuntimeLibrary>
+		</PropertyGroup>
+		
+		<ItemGroup Condition="'$(PlatformToolset)' == 'v120' And ('$(Platform)' == 'Win32' Or '$(Platform)' == 'x86') And '$(AndroidAPILevel)' == ''">
+			<Link>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreadedDebugDll' And '$(Configuration)' == 'Debug'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\Win32\Debug\md\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreadedDebug' And '$(Configuration)' == 'Debug'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\Win32\Debug\mt\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreadedDll' And '$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\Win32\Release\md\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreaded' And '$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\Win32\Release\mt\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			</Link>
+		</ItemGroup>
+		<ItemGroup Condition="'$(PlatformToolset)' == 'v120' And '$(Platform)' == 'x64' And '$(AndroidAPILevel)' == ''">
+			<Link>  
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreadedDebugDll' And '$(Configuration)' == 'Debug'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\x64\Debug\md\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreadedDebug' And '$(Configuration)' == 'Debug'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\x64\Debug\mt\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreadedDll' And '$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\x64\Release\md\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+				<AdditionalDependencies Condition="'$(MYRuntimeLibrary)' == 'MultiThreaded' And '$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\lib\native\v120\windesktop\msvcstl\x64\Release\mt\openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			</Link>
+		</ItemGroup>
+	</Target>
+</Project>

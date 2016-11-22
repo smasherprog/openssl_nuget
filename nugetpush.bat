@@ -1,23 +1,25 @@
 call del *.nupkg
 
-copy cryptopp.nuspec cryptopp_nuget\
-mkdir cryptopp_nuget\build\native\
-copy cryptopp.targets cryptopp_nuget\build\native\
+set basereponame=openssl
 
-copy cryptopp.v120.nuspec cryptopp_v120_nuget\
-mkdir cryptopp_v120_nuget\build\native\
-copy cryptopp.v120.targets cryptopp_v120_nuget\build\native\
-copy cryptopp.v140.nuspec cryptopp_v140_nuget\
-mkdir cryptopp_v140_nuget\build\native\
-copy cryptopp.v140.targets cryptopp_v140_nuget\build\native\
-copy cryptopp.android.nuspec cryptopp_android_nuget\
-mkdir cryptopp_android_nuget\build\native\
-copy cryptopp.android.targets cryptopp_android_nuget\build\native\
+copy %basereponame%.nuspec %basereponame%_nuget\
+mkdir %basereponame%_nuget\build\native\
+copy %basereponame%.targets %basereponame%_nuget\build\native\
 
-nuget pack cryptopp_nuget\cryptopp.nuspec
-nuget pack cryptopp_v120_nuget\cryptopp.v120.nuspec
-nuget pack cryptopp_v140_nuget\cryptopp.v140.nuspec
-nuget pack cryptopp_android_nuget\cryptopp.android.nuspec
+copy %basereponame%.v120.nuspec %basereponame%_v120_nuget\
+mkdir %basereponame%_v120_nuget\build\native\
+copy %basereponame%.v120.targets %basereponame%_v120_nuget\build\native\
+copy %basereponame%.v140.nuspec %basereponame%_v140_nuget\
+mkdir %basereponame%_v140_nuget\build\native\
+copy %basereponame%.v140.targets %basereponame%_v140_nuget\build\native\
+copy %basereponame%.android.nuspec %basereponame%_android_nuget\
+mkdir %basereponame%_android_nuget\build\native\
+copy %basereponame%.android.targets %basereponame%_android_nuget\build\native\
+
+nuget pack %basereponame%_nuget\%basereponame%.nuspec
+nuget pack %basereponame%_v120_nuget\%basereponame%.v120.nuspec
+nuget pack %basereponame%_v140_nuget\%basereponame%.v140.nuspec
+nuget pack %basereponame%_android_nuget\%basereponame%.android.nuspec
 
 for /r . %%g in (*.nupkg) do nuget push -Source https://www.nuget.org %%g -Timeout 2147483
 call del *.nupkg
