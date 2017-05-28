@@ -1,4 +1,5 @@
 <h2>Openssl automated build for nuget</h2>
+<h3>Note: I am no longer supporting this, but will accept PR's and will republish the nuget package. Please use https://github.com/Microsoft/vcpkg instead</h3>
 <p>This is a script I wrote for automated building the build of openssl for windows</p>
 <p>Requirements: Perl for windows. I use http://strawberryperl.com/</p>
 <p>Run build.bat . . . Building all libraries takes about 15 minutes.</p>
